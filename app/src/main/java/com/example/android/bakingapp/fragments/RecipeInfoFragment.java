@@ -35,7 +35,7 @@ public class RecipeInfoFragment extends Fragment {
         unbinder = ButterKnife.bind(this, rootView);
         adapter = new RecipeInfoAdapter((RecipeInfoAdapter.OnRecipeStepClicked) getActivity());
         Recipe recipe = getActivity().getIntent().getParcelableExtra("recipe_extra");
-        RecipeInfoAdapter.steps = recipe.getSteps();
+       adapter.setSteps(recipe.getSteps());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recipeInfoRecyclerView.setLayoutManager(manager);
         recipeInfoRecyclerView.setAdapter(adapter);

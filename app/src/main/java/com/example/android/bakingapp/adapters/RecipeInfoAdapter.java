@@ -18,11 +18,17 @@ import butterknife.ButterKnife;
 
 public class RecipeInfoAdapter extends RecyclerView.Adapter<RecipeInfoAdapter.RecipeInfoViewHolder> {
 
-    public static ArrayList<Step> steps;
+    private ArrayList<Step> steps;
     private OnRecipeStepClicked itemClicked;
 
+    public void setSteps(ArrayList<Step> steps) {
+        this.steps = steps;
+    }
+
     public interface OnRecipeStepClicked {
-        void onStepClicked(Step step, int position);
+        void onStepClicked(Step step, int position, ArrayList<Step> steps);
+
+        void onIngrientsClicked();
     }
 
     public RecipeInfoAdapter(OnRecipeStepClicked itemClicked) {
@@ -63,9 +69,9 @@ public class RecipeInfoAdapter extends RecyclerView.Adapter<RecipeInfoAdapter.Re
                 @Override
                 public void onClick(View v) {
                     if (getAdapterPosition() == 0) {
-                        itemClicked.onStepClicked(null, 0);
+                        itemClicked.onIngrientsClicked();
                     } else {
-                        itemClicked.onStepClicked(steps.get(getAdapterPosition() - 1), getAdapterPosition() - 1);
+                        itemClicked.onStepClicked(steps.get(getAdapterPosition() - 1), getAdapterPosition() - 1, steps);
                     }
                 }
             });

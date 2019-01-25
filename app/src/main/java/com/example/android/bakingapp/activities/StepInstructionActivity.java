@@ -2,6 +2,7 @@ package com.example.android.bakingapp.activities;
 
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import com.example.android.bakingapp.adapters.RecipeInfoAdapter;
 import com.example.android.bakingapp.fragments.StepDiscreptionFragment;
 import com.example.android.bakingapp.fragments.StepVideoFragment;
 import com.example.android.bakingapp.models.Step;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +45,7 @@ public class StepInstructionActivity extends AppCompatActivity {
     TextView backTextView;
 
     Step step;
-
+    ArrayList<Step> steps;
     int position;
 
     private FragmentManager fragmentManager;
@@ -56,10 +59,10 @@ public class StepInstructionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("BakingApp");
 
-
         fragmentManager = getSupportFragmentManager();
 
         step = getIntent().getParcelableExtra("step_extra");
+        steps = getIntent().getParcelableArrayListExtra("step_list_extra");
         position = getIntent().getIntExtra("position_extra", 0);
         if (savedInstanceState == null) {
             StepVideoFragment videoFragment = new StepVideoFragment();
@@ -81,8 +84,8 @@ public class StepInstructionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 step = null;
-                if (position < RecipeInfoAdapter.steps.size() - 1) {
-                    step = RecipeInfoAdapter.steps.get(++position);
+                if (position < steps.size() - 1) {
+                    step = steps.get(++position);
 
                     StepVideoFragment newVideoFragment = new StepVideoFragment();
                     newVideoFragment.setMediaUri(getMediaUri());
@@ -101,7 +104,7 @@ public class StepInstructionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 step = null;
                 if (position > 0) {
-                    step = RecipeInfoAdapter.steps.get(--position);
+                    step = steps.get(--position);
 
                     StepVideoFragment newVideoFragment = new StepVideoFragment();
                     newVideoFragment.setMediaUri(getMediaUri());

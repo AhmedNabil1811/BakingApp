@@ -5,5 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.RecipeInfoActivity"
-    android:id="@+id/TODO">
+    android:id="@+id/TODO"
+    tools:layout="@layout/fragment_recipe_info">
 </fragment>

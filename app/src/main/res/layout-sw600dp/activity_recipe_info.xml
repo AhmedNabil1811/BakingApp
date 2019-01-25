@@ -11,7 +11,9 @@
         android:name="com.example.android.bakingapp.fragments.RecipeInfoFragment"
         android:layout_width="400dp"
         android:layout_height="match_parent"
-        tools:context=".activities.RecipeInfoActivity" />
+        tools:context=".activities.RecipeInfoActivity"
+        android:id="@+id/TODO"
+        tools:layout="@layout/fragment_recipe_info"/>
 
     <View
         android:layout_width="1dp"
@@ -19,8 +21,8 @@
         android:background="@android:color/darker_gray" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
         android:id="@+id/step_discreption_linear_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 

@@ -75,7 +75,7 @@ public class RecipesListFragment extends Fragment implements RecipesListAdapter.
                 .baseUrl(RECIPES_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        ApiService service = retrofit.create(ApiService.class);
+         ApiService service = retrofit.create(ApiService.class);
         Call<ArrayList<Recipe>> call = service.getRecipes();
         call.enqueue(new Callback<ArrayList<Recipe>>() {
             @Override

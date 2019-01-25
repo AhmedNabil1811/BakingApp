@@ -14,6 +14,8 @@ import com.example.android.bakingapp.models.Ingredient;
 import com.example.android.bakingapp.models.Recipe;
 import com.example.android.bakingapp.models.Step;
 
+import java.util.ArrayList;
+
 public class RecipeInfoActivity extends AppCompatActivity implements RecipeInfoAdapter.OnRecipeStepClicked {
 
     private boolean twoBane;
@@ -49,9 +51,8 @@ public class RecipeInfoActivity extends AppCompatActivity implements RecipeInfoA
     }
 
     @Override
-    public void onStepClicked(Step step, int position) {
+    public void onStepClicked(Step step, int position, ArrayList<Step> steps) {
 
-        if (step != null) {
             if (twoBane) {
 
                 StepVideoFragment videoFragment = new StepVideoFragment();
@@ -66,14 +67,20 @@ public class RecipeInfoActivity extends AppCompatActivity implements RecipeInfoA
                 intent.setExtrasClassLoader(Step.class.getClassLoader());
                 intent.putExtra("step_extra", step);
                 intent.putExtra("position_extra", position);
+                intent.putExtra("step_list_extra" , steps);
                 startActivity(intent);
             }
-        } else {
-            Intent intent = new Intent(RecipeInfoActivity.this, IngredientsActivity.class);
-            intent.setExtrasClassLoader(Ingredient.class.getClassLoader());
-            intent.putExtra("ingredients_extra", recipe.getIngredients());
-            startActivity(intent);
         }
+
+
+
+    @Override
+    public void onIngrientsClicked() {
+        Intent intent = new Intent(RecipeInfoActivity.this, IngredientsActivity.class);
+        intent.setExtrasClassLoader(Ingredient.class.getClassLoader());
+        intent.putExtra("ingredients_extra", recipe.getIngredients());
+        startActivity(intent);
+
     }
 
     private Uri getMediaUri(Step step) {
